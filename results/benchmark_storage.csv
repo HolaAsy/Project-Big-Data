@@ -1,0 +1,5 @@
+scale,baris,clickhouse_terkompresi_mb,clickhouse_tak_terkompresi_mb,parquet_minio_mb
+1x,20848,0.81,2.51,0.59
+10x,208480,2.36,24.95,4.03
+50x,1042400,6.98,124.66,18.91
+100x,2084800,12.5,249.19,37.84

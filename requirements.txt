@@ -1,0 +1,4 @@
+minio>=7.2
+clickhouse-connect>=0.8
+pandas>=2.2
+pyarrow>=16
