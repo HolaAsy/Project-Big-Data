@@ -1,5 +1,5 @@
-skenario,jumlah_baris,jumlah_kolom,order_id_unik,missing_value,ukuran_csv_mb,ukuran_parquet_mb
-1x,20848,20,20848,0,4.28,0.59
-10x,208480,20,208480,0,43.75,4.03
-50x,1042400,20,1042400,0,219.15,18.91
-100x,2084800,20,2084800,0,438.41,37.84
+skenario,jumlah_baris,jumlah_kolom,order_id_unik,missing_value,ukuran_parquet_mb
+1x,20848,20,20848,0,0.59
+10x,208480,20,208480,0,4.03
+50x,1042400,20,1042400,0,18.91
+100x,2084800,20,2084800,0,37.84
