@@ -273,7 +273,19 @@ Pembagian hasil benchmark dilakukan agar setiap file memiliki tujuan analisis ya
 
 ## 10. Cleanup
 
-Menghentikan container:
+Menghentikan sementara container tanpa menghapus container:
+
+```bash
+docker compose stop
+```
+
+Menjalankan kembali container yang sudah dihentikan:
+
+```bash
+docker compose start
+```
+
+Menghentikan dan menghapus container:
 
 ```bash
 docker compose down
@@ -285,4 +297,8 @@ Menghapus container sekaligus seluruh persistent volumes:
 docker compose down -v
 ```
 
-**Perhatian:** Perintah kedua menghapus data MinIO dan ClickHouse yang tersimpan secara persisten.
+**Perhatian:**
+- `docker compose stop`: Menghentikan container, tetapi container dan data tetap tersimpan.
+- `docker compose start`: Menjalankan kembali container yang sudah dihentikan.
+- `docker compose down`: Menghentikan dan menghapus container, tetapi persistent volumes tetap tersimpan.
+- `docker compose down -v`: Menghapus container sekaligus persistent volumes, termasuk data MinIO dan ClickHouse.
