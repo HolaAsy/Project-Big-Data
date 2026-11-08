@@ -29,7 +29,7 @@ Aspek yang diuji meliputi:
           +----+----+
           |         |
           v         v
-      S3 Engine  MergeTree
+      S3 Engine  MergeTree      (ClickHouse)
           |         ^
           |         |
           +---------+
