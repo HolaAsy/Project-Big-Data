@@ -69,7 +69,7 @@ project/
 │
 ├── 01_init_minio.py
 ├── 02_init_clickhouse.py
-├── 03_upload_to_minio.py
+├── 03_upload_ready.py
 ├── 04_load_clickhouse.py
 ├── 05_query_benchmark.py
 │
@@ -82,6 +82,7 @@ project/
 │           └── dataset_100x.parquet
 │
 └── results/
+    ├── load_metrics.csv
     ├── benchmark_detail.csv
     ├── benchmark_ringkasan.csv
     └── benchmark_storage.csv
@@ -151,7 +152,7 @@ python 01_init_minio.py
 python 02_init_clickhouse.py
 
 # 4. Upload dataset Parquet ke MinIO
-python 03_upload_to_minio.py
+python 03_upload_ready.py
 
 # 5. Ingestion data ke ClickHouse MergeTree
 python 04_load_clickhouse.py
@@ -183,9 +184,28 @@ python 05_query_benchmark.py --no-cpu
 
 Hasil pengujian disimpan dalam folder `results/`.
 
-Terdapat tiga file CSV yang dibagi berdasarkan jenis informasi benchmark yang disimpan, supaya hasil pengujian lebih mudah dibaca, dianalisis, dan dibandingkan.
+Terdapat empat file CSV yang memiliki fungsi berbeda agar hasil pengujian lebih mudah dibaca, dianalisis, dan dibandingkan.
 
-### 8.1. benchmark_detail.csv
+### 8.1. load_metrics.csv
+
+**Data hasil ingestion ke ClickHouse**
+
+File ini berisi informasi hasil proses pemindahan data dari MinIO ke tabel ClickHouse MergeTree.
+
+Informasi yang dicatat meliputi:
+
+- Skala dataset.
+- Jumlah baris yang berhasil dimuat.
+- Waktu yang dibutuhkan untuk proses ingestion.
+- Ukuran data terkompresi di ClickHouse.
+- Ukuran data sebelum kompresi di ClickHouse.
+- Ukuran file Parquet di MinIO.
+
+**Fungsi:** Mengukur waktu proses loading data serta membandingkan ukuran penyimpanan setelah data dimuat ke ClickHouse dengan ukuran file Parquet di MinIO.
+
+File ini dihasilkan oleh `04_load_clickhouse.py`.
+
+### 8.2. benchmark_detail.csv
 
 **Data pengujian detail**
 
@@ -204,7 +224,7 @@ Informasi yang dicatat meliputi:
 
 **Fungsi:** Mengetahui hasil setiap pengujian secara detail dan menganalisis performa sistem pada setiap percobaan.
 
-### 8.2. benchmark_ringkasan.csv
+### 8.3. benchmark_ringkasan.csv
 
 **Data hasil rangkuman**
 
@@ -224,7 +244,7 @@ Informasi yang ditampilkan meliputi:
 
 File ini menjadi sumber utama untuk membuat tabel dan grafik perbandingan performa.
 
-### 8.3. benchmark_storage.csv
+### 8.4. benchmark_storage.csv
 
 **Data ukuran penyimpanan**
 
@@ -238,16 +258,18 @@ Informasi yang dicatat meliputi:
 - Ukuran data sebelum kompresi ClickHouse.
 - Ukuran file Parquet di MinIO.
 
+**Fungsi:** Membandingkan efisiensi penyimpanan antara ClickHouse dan MinIO pada setiap skala dataset.
 
-## 9. Why Are the Results Divided into Three CSV Files?
+## 9. Why Are the Results Divided into Four CSV Files?
 
 Pembagian hasil benchmark dilakukan agar setiap file memiliki tujuan analisis yang berbeda.
 
 | File | Main Purpose |
 |---|---|
-| benchmark_detail.csv | Melihat hasil setiap percobaan |
-| benchmark_ringkasan.csv | Membandingkan performa sistem |
-| benchmark_storage.csv | Menganalisis ukuran penyimpanan |
+| `load_metrics.csv` | Mengukur waktu ingestion dan mencatat ukuran data setelah loading |
+| `benchmark_detail.csv` | Melihat hasil setiap percobaan |
+| `benchmark_ringkasan.csv` | Membandingkan performa sistem |
+| `benchmark_storage.csv` | Menganalisis ukuran penyimpanan |
 
 ## 10. Cleanup
 
