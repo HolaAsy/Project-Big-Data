@@ -238,18 +238,6 @@ Informasi yang dicatat meliputi:
 - Ukuran data sebelum kompresi ClickHouse.
 - Ukuran file Parquet di MinIO.
 
-Contoh hasil pengukuran:
-
-| Skala | ClickHouse Compressed | Parquet MinIO |
-|---|---:|---:|
-| 1x | 0,81 MB | 0,59 MB |
-| 10x | 2,36 MB | 4,03 MB |
-| 50x | 6,98 MB | 18,91 MB |
-| 100x | 12,5 MB | 37,84 MB |
-
-**Fungsi:** Membandingkan kebutuhan penyimpanan ClickHouse dan Parquet di MinIO pada berbagai skala dataset.
-
-*Catatan: Angka pada tabel merupakan contoh hasil pengukuran dan perlu disesuaikan dengan hasil benchmark aktual.*
 
 ## 9. Why Are the Results Divided into Three CSV Files?
 
@@ -260,40 +248,6 @@ Pembagian hasil benchmark dilakukan agar setiap file memiliki tujuan analisis ya
 | benchmark_detail.csv | Melihat hasil setiap percobaan |
 | benchmark_ringkasan.csv | Membandingkan performa sistem |
 | benchmark_storage.csv | Menganalisis ukuran penyimpanan |
-
-Alur pembagian hasil:
-
-```text
-       Benchmark Testing
-               |
-               v
-       Hasil Pengujian
-               |
-       +-------+-------+
-       |       |       |
-       v       v       v
-    Detail Ringkasan Storage
-       |       |       |
-       v       v       v
-    Analisis Performa dan Penyimpanan
-```
-
-Alasan pembagiannya:
-
-1. Memisahkan informasi performa dan penyimpanan agar tidak tercampur.
-2. Mempermudah analisis berdasarkan tujuan pengujian.
-3. Memudahkan pembuatan grafik dan tabel untuk laporan penelitian.
-4. Mempertahankan data detail sehingga hasil ringkasan dapat ditelusuri kembali.
-
-### Conclusion
-
-Ketiga file CSV tersebut saling melengkapi dan merupakan bagian dari satu rangkaian evaluasi benchmark.
-
-- `benchmark_detail.csv` digunakan untuk melihat hasil pengujian secara rinci.
-- `benchmark_ringkasan.csv` digunakan untuk membandingkan performa sistem.
-- `benchmark_storage.csv` digunakan untuk menganalisis kebutuhan penyimpanan.
-
-Dengan pembagian ini, hasil benchmark menjadi lebih terstruktur, mudah dianalisis, dan dapat digunakan sebagai dasar evaluasi performa MinIO dan ClickHouse pada berbagai skala dataset.
 
 ## 10. Cleanup
 
